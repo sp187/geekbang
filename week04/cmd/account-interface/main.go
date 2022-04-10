@@ -2,8 +2,11 @@ package main
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"github.com/pkg/errors"
+	"gitlab.bj.sensetime.com/sense-remote/project/geekbang/week04/internal/config"
+	"gitlab.bj.sensetime.com/sense-remote/project/geekbang/week04/internal/service"
 	"golang.org/x/sync/errgroup"
 	"net/http"
 	"os"
@@ -11,23 +14,28 @@ import (
 	"syscall"
 )
 
+var configPath string
+
 var stopSignal = make(chan bool)
 
+func init() {
+	flag.StringVar(&configPath, "conf", "config/config.yaml", "-conf: config file path")
+}
+
 func main() {
+	InitEnv()
 	eg, ctx := errgroup.WithContext(context.Background())
 	server := NewHttpServer("test")
-	server.Route("/", HelloWorld)
-	server.Route("/stop", StopServer)
+	server.Route("/account", service.GetAccount)
+	server.Route("/account/update", service.UpdateAccount)
 
-	// 1
 	eg.Go(func() error {
-		fmt.Println("listen port 8080")
-		err := server.Serve(":8080")
+		fmt.Println("listen port ", config.GetServicePort())
+		err := server.Serve(":" + config.GetServicePort())
 		fmt.Printf("exit goroutine 1: %+v\n", err)
 		return err
 	})
 
-	// 2
 	eg.Go(func() error {
 		select {
 		case <-ctx.Done():
@@ -38,7 +46,6 @@ func main() {
 		return server.Stop()
 	})
 
-	// 3
 	eg.Go(func() error {
 		sig := make(chan os.Signal)
 		signal.Notify(sig, syscall.SIGHUP, syscall.SIGINT, syscall.SIGQUIT)
@@ -55,17 +62,6 @@ func main() {
 	})
 
 	fmt.Printf("server exit: %+v\n", eg.Wait())
-}
-
-func HelloWorld(w http.ResponseWriter, req *http.Request) {
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("hello world"))
-}
-
-func StopServer(w http.ResponseWriter, req *http.Request) {
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("goodbye"))
-	close(stopSignal)
 }
 
 type Server interface {
