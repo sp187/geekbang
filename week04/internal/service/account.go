@@ -3,9 +3,10 @@ package service
 import (
 	"encoding/json"
 	"errors"
-	"gitlab.bj.sensetime.com/sense-remote/project/geekbang/week04/internal/biz"
-	"gitlab.bj.sensetime.com/sense-remote/project/geekbang/week04/internal/data"
 	"net/http"
+
+	"github.com/sp187/geekbang/week04/internal/biz"
+	"github.com/sp187/geekbang/week04/internal/data"
 )
 
 type AccountReq struct {

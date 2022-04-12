@@ -4,14 +4,16 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"github.com/pkg/errors"
-	"gitlab.bj.sensetime.com/sense-remote/project/geekbang/week04/internal/config"
-	"gitlab.bj.sensetime.com/sense-remote/project/geekbang/week04/internal/service"
-	"golang.org/x/sync/errgroup"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"github.com/sp187/geekbang/week04/internal/config"
+	"github.com/sp187/geekbang/week04/internal/service"
+
+	"github.com/pkg/errors"
+	"golang.org/x/sync/errgroup"
 )
 
 var configPath string

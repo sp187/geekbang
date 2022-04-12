@@ -3,6 +3,7 @@ package data
 import (
 	"database/sql"
 	"errors"
+
 	xerrors "github.com/pkg/errors"
 )
 

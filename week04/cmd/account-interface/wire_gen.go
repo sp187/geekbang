@@ -7,8 +7,8 @@
 package main
 
 import (
-	"gitlab.bj.sensetime.com/sense-remote/project/geekbang/week04/internal/config"
-	"gitlab.bj.sensetime.com/sense-remote/project/geekbang/week04/internal/data"
+	"github.com/sp187/geekbang/week04/internal/config"
+	"github.com/sp187/geekbang/week04/internal/data"
 )
 
 // Injectors from wire.go:

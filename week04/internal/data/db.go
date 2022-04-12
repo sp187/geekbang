@@ -3,9 +3,11 @@ package data
 import (
 	"database/sql"
 	"fmt"
-	_ "github.com/lib/pq"
-	"gitlab.bj.sensetime.com/sense-remote/project/geekbang/week04/internal/config"
 	"sync"
+
+	"github.com/sp187/geekbang/week04/internal/config"
+
+	_ "github.com/lib/pq"
 )
 
 var dbOnce sync.Once

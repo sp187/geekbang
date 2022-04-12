@@ -3,12 +3,13 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/pkg/errors"
-	"golang.org/x/sync/errgroup"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
+
+	xerrors "github.com/pkg/errors"
+	"golang.org/x/sync/errgroup"
 )
 
 var stopSignal = make(chan bool)
@@ -48,7 +49,7 @@ func main() {
 			err = ctx.Err()
 			fmt.Println("exit goroutine 3: some errors happened in goroutine 1 or 2")
 		case s := <-sig:
-			err = errors.Errorf("exit goroutine 3: system signal call %+v", s)
+			err = xerrors.Errorf("exit goroutine 3: system signal call %+v", s)
 			fmt.Println(err.Error())
 		}
 		return err
