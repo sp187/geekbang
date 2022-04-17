@@ -7,9 +7,9 @@ import (
 
 // CounterWin 滑动窗口
 type CounterWin interface {
-	Add()     // 计数+1
-	Next()    // 窗口滑动
-	Sample() int64  // 获取当前采样窗口内的值
+	Add()          // 计数+1
+	Next()         // 窗口滑动
+	Sample() int64 // 获取当前采样窗口内的值
 }
 
 // TimerCounterWin  时间滑动窗口
@@ -20,19 +20,19 @@ type TimerCounterWin interface {
 }
 
 type _counter struct {
-	ring *_ring
-	bucketDuration  time.Duration
-	winSize         int64
-	sampleInterval        time.Duration // 采样间隔
-	done chan struct{}
+	ring           *_ring
+	bucketDuration time.Duration
+	winSize        int64
+	sampleInterval time.Duration // 采样间隔
+	done           chan struct{}
 }
 
 func (c *_counter) Add() {
 	c.ring.add(1)
 }
 
-
 var startOnce sync.Once
+
 func (c *_counter) Start() {
 	startOnce.Do(func() {
 		go func() {
@@ -42,7 +42,7 @@ func (c *_counter) Start() {
 				select {
 				case <-tic.C:
 					c.ring.next()
-				case <- c.done:
+				case <-c.done:
 					return
 				}
 			}
@@ -51,6 +51,7 @@ func (c *_counter) Start() {
 }
 
 var closeOnce sync.Once
+
 func (c *_counter) Close() {
 	closeOnce.Do(func() {
 		close(c.done)
@@ -76,11 +77,10 @@ func NewTimerCounter(interval time.Duration, winSize int64) TimerCounterWin {
 	}
 }
 
-
 type _ring struct {
-	ring []int64
+	ring                    []int64
 	head, tail, length, sum int64
-	full bool
+	full                    bool
 	sync.Mutex
 }
 
@@ -109,7 +109,7 @@ func (r *_ring) next() {
 		}
 	} else {
 		r.tail++
-		if r.tail - r.head == r.length - 1 {
+		if r.tail-r.head == r.length-1 {
 			r.full = true
 		}
 	}

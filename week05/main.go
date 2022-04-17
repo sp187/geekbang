@@ -16,13 +16,13 @@ func main() {
 
 	// 模拟 qps = 500
 	go func() {
-		tic := time.NewTicker(2*time.Millisecond)
+		tic := time.NewTicker(2 * time.Millisecond)
 		defer tic.Stop()
 		for {
 			select {
 			case <-tic.C:
 				rolling.Add()
-			case <- done:
+			case <-done:
 				return
 			}
 		}
@@ -30,23 +30,21 @@ func main() {
 
 	// 模拟 qps = 200
 	go func() {
-		tic := time.NewTicker(5*time.Millisecond)
+		tic := time.NewTicker(5 * time.Millisecond)
 		defer tic.Stop()
 		for {
 			select {
 			case <-tic.C:
 				rolling.Add()
-			case <- done:
+			case <-done:
 				return
 			}
 		}
 	}()
 
-
-
 	// 1秒钟采样窗口内的数据 500 + 200 = 700
 	go func() {
-		t := time.NewTicker(1*time.Second)
+		t := time.NewTicker(1 * time.Second)
 		defer t.Stop()
 		for i := 1; i <= 10; i++ {
 			select {
@@ -56,6 +54,6 @@ func main() {
 		}
 	}()
 
-	time.Sleep(10100*time.Millisecond)
+	time.Sleep(10100 * time.Millisecond)
 	close(done)
 }
