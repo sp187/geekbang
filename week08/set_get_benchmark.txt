@@ -1,0 +1,20 @@
+goos: linux
+goarch: amd64
+pkg: github.com/sp187/geekbang/week08
+cpu: Intel(R) Core(TM) i7-10875H CPU @ 2.30GHz
+BenchmarkRedisSet10-16     	   57732	     20876 ns/op	     352 B/op	       9 allocs/op
+BenchmarkRedisSet20-16     	   57582	     20464 ns/op	     352 B/op	       9 allocs/op
+BenchmarkRedisSet50-16     	   58125	     20760 ns/op	     352 B/op	       9 allocs/op
+BenchmarkRedisSet100-16    	   58377	     20329 ns/op	     352 B/op	       9 allocs/op
+BenchmarkRedisSet200-16    	   56449	     20925 ns/op	     352 B/op	       9 allocs/op
+BenchmarkRedisSet1k-16     	   58094	     21029 ns/op	     352 B/op	       9 allocs/op
+BenchmarkRedisSet5k-16     	   53745	     21331 ns/op	     352 B/op	       9 allocs/op
+BenchmarkRedisGet10-16     	   63482	     19411 ns/op	     192 B/op	       8 allocs/op
+BenchmarkRedisGet20-16     	   62367	     19022 ns/op	     202 B/op	       8 allocs/op
+BenchmarkRedisGet50-16     	   61888	     19518 ns/op	     242 B/op	       8 allocs/op
+BenchmarkRedisGet100-16    	   61269	     19426 ns/op	     291 B/op	       8 allocs/op
+BenchmarkRedisGet200-16    	   61489	     19454 ns/op	     387 B/op	       8 allocs/op
+BenchmarkRedisGet1k-16     	   58578	     20084 ns/op	    1332 B/op	       8 allocs/op
+BenchmarkRedisGet5k-16     	   53456	     22676 ns/op	    5556 B/op	       8 allocs/op
+PASS
+ok  	github.com/sp187/geekbang/week08	21.633s
