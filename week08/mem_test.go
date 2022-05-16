@@ -2,82 +2,94 @@ package week08
 
 import (
 	"fmt"
-	"strconv"
 	"testing"
-
-	"github.com/shirou/gopsutil/v3/mem"
 )
+
+/*
+
+
+ */
 
 func TestMem(t *testing.T) {
 	InitClient()
-	FlushAll()
 	defer FlushAll()
 	var (
-		v           *mem.VirtualMemoryStat
-		currentFree uint64
+		curMem, preMem int64
 	)
 
-	v, _ = mem.VirtualMemory()
-	currentFree = v.Available
+	FlushAll()
+	curMem, _ = GetMemInfo()
 	string10 := randomStr(10)
 	for i := 0; i < 100000; i++ {
-		SetKey("10:"+strconv.Itoa(i), string10)
+		SetKey(fmt.Sprintf("%05d", i), string10)
 	}
-	v, _ = mem.VirtualMemory()
-	fmt.Printf("10 bytes value: %d bytes per key\n", (currentFree-v.Available)/100000)
+	preMem = curMem
+	curMem, _ = GetMemInfo()
+	fmt.Printf("10 bytes: %f byte\n", float64(curMem-preMem)/100000)
 
-	v, _ = mem.VirtualMemory()
-	currentFree = v.Available
+	FlushAll()
+	curMem, _ = GetMemInfo()
 	string20 := randomStr(20)
 	for i := 0; i < 100000; i++ {
-		SetKey("20:"+strconv.Itoa(i), string20)
+		SetKey(fmt.Sprintf("%05d", i), string20)
 	}
-	v, _ = mem.VirtualMemory()
-	fmt.Printf("20 bytes value: %d bytes per key\n", (currentFree-v.Available)/100000)
+	preMem = curMem
+	curMem, _ = GetMemInfo()
+	fmt.Printf("20 bytes: %f byte\n", float64(curMem-preMem)/100000)
 
-	v, _ = mem.VirtualMemory()
-	currentFree = v.Available
+	FlushAll()
+	curMem, _ = GetMemInfo()
 	string50 := randomStr(50)
 	for i := 0; i < 100000; i++ {
-		SetKey("50:"+strconv.Itoa(i), string50)
+		SetKey(fmt.Sprintf("%05d", i), string50)
 	}
-	v, _ = mem.VirtualMemory()
-	fmt.Printf("50 bytes value: %d bytes per key\n", (currentFree-v.Available)/100000)
+	preMem = curMem
+	curMem, _ = GetMemInfo()
+	fmt.Printf("50 bytes: %f byte\n", float64(curMem-preMem)/100000)
 
-	v, _ = mem.VirtualMemory()
-	currentFree = v.Available
+	FlushAll()
+	curMem, _ = GetMemInfo()
 	string100 := randomStr(100)
 	for i := 0; i < 100000; i++ {
-		SetKey("100:"+strconv.Itoa(i), string100)
+		SetKey(fmt.Sprintf("%05d", i), string100)
 	}
-	v, _ = mem.VirtualMemory()
-	fmt.Printf("100 bytes value: %d bytes per key\n", (currentFree-v.Available)/100000)
+	preMem = curMem
+	curMem, _ = GetMemInfo()
+	fmt.Printf("100 bytes: %f byte\n", float64(curMem-preMem)/100000)
 
-	v, _ = mem.VirtualMemory()
-	currentFree = v.Available
+	FlushAll()
+	curMem, _ = GetMemInfo()
 	string200 := randomStr(200)
 	for i := 0; i < 100000; i++ {
-		SetKey("200:"+strconv.Itoa(i), string200)
+		SetKey(fmt.Sprintf("%05d", i), string200)
 	}
-	v, _ = mem.VirtualMemory()
-	fmt.Printf("200 bytes value: %d bytes per key\n", (currentFree-v.Available)/100000)
+	preMem = curMem
+	curMem, _ = GetMemInfo()
+	fmt.Printf("200 bytes: %f byte\n", float64(curMem-preMem)/100000)
 
-	v, _ = mem.VirtualMemory()
-	currentFree = v.Available
+	FlushAll()
+	curMem, _ = GetMemInfo()
 	string1k := randomStr(1024)
 	for i := 0; i < 50000; i++ {
-		SetKey("1k:"+strconv.Itoa(i), string1k)
+		SetKey(fmt.Sprintf("%05d", i), string1k)
 	}
-	v, _ = mem.VirtualMemory()
-	fmt.Printf("1k bytes value: %d bytes per key\n", (currentFree-v.Available)/50000)
+	preMem = curMem
+	curMem, _ = GetMemInfo()
+	fmt.Printf("1024 bytes: %f byte\n", float64(curMem-preMem)/50000)
 
-	v, _ = mem.VirtualMemory()
-	currentFree = v.Available
+	FlushAll()
+	curMem, _ = GetMemInfo()
 	string5k := randomStr(5120)
 	for i := 0; i < 10000; i++ {
-		SetKey("1k:"+strconv.Itoa(i), string5k)
+		SetKey(fmt.Sprintf("%05d", i), string5k)
 	}
-	v, _ = mem.VirtualMemory()
-	fmt.Printf("5k bytes value: %d bytes per key\n", (currentFree-v.Available)/10000)
+	preMem = curMem
+	curMem, _ = GetMemInfo()
+	fmt.Printf("5120 bytes: %f byte\n", float64(curMem-preMem)/10000)
+}
 
+func TestInfo(t *testing.T) {
+	mem, _ := GetMemInfo()
+	fmt.Println(mem)
+	fmt.Printf("%05d\n", 3)
 }

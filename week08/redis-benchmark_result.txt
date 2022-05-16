@@ -1,0 +1,44 @@
+redis-benchmark -d 10 -t set,get -c 1000 -q
+SET: 108225.10 requests per second
+GET: 109170.30 requests per second
+
+
+redis-benchmark -d 20 -t set,get -c 1000 -q
+SET: 109051.26 requests per second
+GET: 108108.11 requests per second
+
+
+redis-benchmark -d 50 -t set,get -c 1000 -q
+SET: 108225.10 requests per second
+GET: 108459.87 requests per second
+
+
+redis-benchmark -d 100 -t set,get -c 1000 -q
+SET: 109170.30 requests per second
+GET: 107991.36 requests per second
+
+
+redis-benchmark -d 200 -t set,get -c 1000 -q
+SET: 104166.67 requests per second
+GET: 108932.46 requests per second
+
+
+redis-benchmark -d 1024 -t set,get -c 1000 -q
+SET: 102774.92 requests per second
+GET: 121951.22 requests per second
+
+
+redis-benchmark -d 5120 -t set,get -c 1000 -q
+SET: 96153.85 requests per second
+GET: 101112.23 requests per second
+
+
+redis-benchmark -d 10240 -t set,get -c 1000 -q
+SET: 87642.41 requests per second
+GET: 86956.52 requests per second
+
+
+redis-benchmark -d 51200 -t set,get -c 1000 -q
+SET: 38505.97 requests per second
+GET: 31036.62 requests per second
+

@@ -1,8 +1,11 @@
 package week08
 
 import (
+	"errors"
 	"github.com/go-redis/redis"
 	"math/rand"
+	"regexp"
+	"strconv"
 	"time"
 )
 
@@ -28,6 +31,17 @@ func SetKey(key string, value interface{}) error {
 
 func GetKey(key string) (interface{}, error) {
 	return client.Get(key).Result()
+}
+
+var memReg = regexp.MustCompile(`used_memory:(\d+)`)
+
+func GetMemInfo() (int64, error) {
+	mem := client.Info("memory").String()
+	result := memReg.FindStringSubmatch(mem)
+	if len(result) > 0 {
+		return strconv.ParseInt(result[1], 10, 64)
+	}
+	return 0, errors.New("unexpected error")
 }
 
 func FlushAll() error {
