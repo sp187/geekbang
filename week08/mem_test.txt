@@ -1,0 +1,8 @@
+=== RUN   TestMem
+10 bytes: 124.562000 byte
+20 bytes: 140.971520 byte
+50 bytes: 172.971520 byte
+100 bytes: 220.971520 byte
+200 bytes: 332.971520 byte
+1024 bytes: 1388.971520 byte
+5120 bytes: 6258.214400 byte
