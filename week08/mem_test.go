@@ -19,9 +19,8 @@ func TestMem(t *testing.T) {
 
 	FlushAll()
 	curMem, _ = GetMemInfo()
-	string10 := randomStr(10)
 	for i := 0; i < 100000; i++ {
-		SetKey(fmt.Sprintf("%05d", i), string10)
+		SetKey(fmt.Sprintf("%05d", i), randomStr(10))
 	}
 	preMem = curMem
 	curMem, _ = GetMemInfo()
@@ -29,9 +28,8 @@ func TestMem(t *testing.T) {
 
 	FlushAll()
 	curMem, _ = GetMemInfo()
-	string20 := randomStr(20)
 	for i := 0; i < 100000; i++ {
-		SetKey(fmt.Sprintf("%05d", i), string20)
+		SetKey(fmt.Sprintf("%05d", i), randomStr(20))
 	}
 	preMem = curMem
 	curMem, _ = GetMemInfo()
@@ -39,9 +37,8 @@ func TestMem(t *testing.T) {
 
 	FlushAll()
 	curMem, _ = GetMemInfo()
-	string50 := randomStr(50)
 	for i := 0; i < 100000; i++ {
-		SetKey(fmt.Sprintf("%05d", i), string50)
+		SetKey(fmt.Sprintf("%05d", i), randomStr(50))
 	}
 	preMem = curMem
 	curMem, _ = GetMemInfo()
@@ -49,9 +46,8 @@ func TestMem(t *testing.T) {
 
 	FlushAll()
 	curMem, _ = GetMemInfo()
-	string100 := randomStr(100)
 	for i := 0; i < 100000; i++ {
-		SetKey(fmt.Sprintf("%05d", i), string100)
+		SetKey(fmt.Sprintf("%05d", i), randomStr(100))
 	}
 	preMem = curMem
 	curMem, _ = GetMemInfo()
@@ -59,9 +55,8 @@ func TestMem(t *testing.T) {
 
 	FlushAll()
 	curMem, _ = GetMemInfo()
-	string200 := randomStr(200)
 	for i := 0; i < 100000; i++ {
-		SetKey(fmt.Sprintf("%05d", i), string200)
+		SetKey(fmt.Sprintf("%05d", i), randomStr(200))
 	}
 	preMem = curMem
 	curMem, _ = GetMemInfo()
@@ -69,9 +64,8 @@ func TestMem(t *testing.T) {
 
 	FlushAll()
 	curMem, _ = GetMemInfo()
-	string1k := randomStr(1024)
 	for i := 0; i < 50000; i++ {
-		SetKey(fmt.Sprintf("%05d", i), string1k)
+		SetKey(fmt.Sprintf("%05d", i), randomStr(1024))
 	}
 	preMem = curMem
 	curMem, _ = GetMemInfo()
@@ -79,9 +73,8 @@ func TestMem(t *testing.T) {
 
 	FlushAll()
 	curMem, _ = GetMemInfo()
-	string5k := randomStr(5120)
 	for i := 0; i < 10000; i++ {
-		SetKey(fmt.Sprintf("%05d", i), string5k)
+		SetKey(fmt.Sprintf("%05d", i), randomStr(5120))
 	}
 	preMem = curMem
 	curMem, _ = GetMemInfo()
