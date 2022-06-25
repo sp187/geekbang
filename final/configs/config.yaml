@@ -1,0 +1,10 @@
+db_host: localhost
+db_port: 5432
+db_user: gis
+db_password: gis
+db_name: gis
+db_type: postgresql
+cache_host: localhost
+cache_port: 6379
+service_port: 8080
+admin_port: 8089
